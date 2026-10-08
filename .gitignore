@@ -1,0 +1,23 @@
+# Build output and packaged app (attach dist zip to a GitHub Release instead)
+out/
+target/
+dist/
+
+# Local databases (contain patient data and password hashes)
+data/
+*.db
+
+# Old version kept locally only
+_backup_old_version/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# JVM crash logs
+hs_err_pid*.log
+*.log
