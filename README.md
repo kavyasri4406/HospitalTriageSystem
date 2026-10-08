@@ -27,6 +27,18 @@ Data is stored in `ERTriage\data\hospital_triage.db` (SQLite). For several PCs s
 point every install at MySQL by setting environment variables before launch:
 `HOSPITAL_DB_MODE=mysql`, `HOSPITAL_DB_URL`, `HOSPITAL_DB_USER`, `HOSPITAL_DB_PASSWORD`.
 
+## Web version (Render)
+
+The same system also runs as a website, still written only in Java: `com.hospital.web.WebServer` uses the
+JDK's built-in `com.sun.net.httpserver` and renders every page from Java code (no HTML/JS files, no frameworks).
+It reuses the whole backend: triage, priority queue, bed matching, roles, JDBC.
+
+- Run locally: `java -cp "out\classes;lib\*" com.hospital.web.WebServer` then open http://localhost:8080
+- Deploy: on render.com choose **New > Blueprint**, pick this repository (it reads `render.yaml` and `Dockerfile`).
+- Security: PBKDF2 passwords, HttpOnly session cookies, CSRF tokens on every form, HTML escaping, strict CSP.
+- On Render's free plan the SQLite file resets when the service restarts. For permanent data set
+  `HOSPITAL_DB_MODE=mysql` plus `HOSPITAL_DB_URL`, `HOSPITAL_DB_USER`, `HOSPITAL_DB_PASSWORD` in Render.
+
 ## Features
 
 - ESI triage with live preview, custom max-heap priority queue with wait-time aging

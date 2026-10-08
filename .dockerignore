@@ -1,0 +1,8 @@
+.git
+out
+dist
+data
+target
+_backup_old_version
+*.db
+*.log

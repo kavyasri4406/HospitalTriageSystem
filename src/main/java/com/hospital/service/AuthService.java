@@ -74,6 +74,16 @@ public class AuthService {
         return OperationResult.ok("Welcome, " + user.getFullName() + ".");
     }
 
+    /**
+     * Restores an already-authenticated user (web sessions: one request at a time acts as its user).
+     * Re-reads the account so a deactivated or deleted user is refused immediately.
+     */
+    public boolean resume(int staffId) {
+        StaffUser u = staffDAO.findById(staffId).orElse(null);
+        currentUser = u != null && u.isActive() ? u : null;
+        return currentUser != null;
+    }
+
     public void logout() {
         currentUser = null;
     }

@@ -136,6 +136,9 @@ public class HospitalManager implements AutoCloseable {
     /** Logged-in user, or null on the login screen. */
     public StaffUser currentUser() { return auth.currentUser(); }
 
+    /** Web sessions: act as an already-logged-in user for the current request. False if the account is gone or inactive. */
+    public boolean resumeSession(int staffId) { return auth.resume(staffId); }
+
     public boolean hasPermission(Permission permission) { return auth.hasPermission(permission); }
 
     private OperationResult denied(Permission permission) {
